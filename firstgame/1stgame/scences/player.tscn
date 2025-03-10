@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://c3i5tlb7v1asw"]
+
+[ext_resource type="Script" uid="uid://d1vkar68ab74r" path="res://scripts/player.gd" id="1_3j5lm"]
+[ext_resource type="Texture2D" uid="uid://qs3dt2k143b8" path="res://assets/kenney_pico-8-platformer/Transparent/Tilemap/tilemap_packed.png" id="2_3j5lm"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_efpdg"]
+atlas = ExtResource("2_3j5lm")
+region = Rect2(0, 56, 8, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_efpdg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_efpdg")
+}],
+"loop": true,
+"name": &"default",
+"speed": 15.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hbu4s"]
+radius = 8.0
+
+[node name="Player" type="CharacterBody2D"]
+collision_layer = 2
+script = ExtResource("1_3j5lm")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -4)
+sprite_frames = SubResource("SpriteFrames_efpdg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -3.295)
+scale = Vector2(0.425, 0.425)
+shape = SubResource("CircleShape2D_hbu4s")

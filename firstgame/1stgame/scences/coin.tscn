@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://clube3qndhvkx"]
+
+[ext_resource type="Texture2D" uid="uid://qs3dt2k143b8" path="res://assets/kenney_pico-8-platformer/Transparent/Tilemap/tilemap_packed.png" id="1_d5gmh"]
+[ext_resource type="Script" uid="uid://cljphkgek70ib" path="res://scripts/coin.gd" id="1_xfbhx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0t63x"]
+size = Vector2(4, 4)
+
+[node name="coin" type="Area2D"]
+collision_mask = 2
+script = ExtResource("1_xfbhx")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_d5gmh")
+region_enabled = true
+region_rect = Rect2(106, 42, 4, 4)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_0t63x")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="tree_entered" from="CollisionShape2D" to="." method="_on_collision_shape_2d_tree_entered"]
