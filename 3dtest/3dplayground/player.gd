@@ -20,7 +20,7 @@ func _process(delta: float) -> void:
 	
 	
 	#User Input
-	apply_central_force(input * 1200 * delta)
+	apply_central_force(twistpivot.basis*input * 1200 * delta)
 	twistpivot.rotate_y(twist_input)
 	pitchpivot.rotate_x(pitch_input)
 	pitchpivot.rotation.x = clamp(pitchpivot.rotation.x,
