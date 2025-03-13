@@ -1,6 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://bsfj34jmgit1s"]
+[gd_scene load_steps=4 format=3 uid="uid://h6bvkyfuhspg"]
 
-[ext_resource type="Script" uid="uid://ibc0rplybptl" path="res://player.gd" id="1_hqvp4"]
+[ext_resource type="Script" uid="uid://ibc0rplybptl" path="res://player.gd" id="1_4flbx"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_onrkg"]
 
@@ -9,19 +9,10 @@ points = PackedVector3Array(-0.125207, -0.532801, -0.480507, 0.0227831, 0.47607,
 
 [node name="Player" type="RigidBody3D"]
 lock_rotation = true
-script = ExtResource("1_hqvp4")
+script = ExtResource("1_4flbx")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("CapsuleMesh_onrkg")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("ConvexPolygonShape3D_i3pqv")
-
-[node name="twistpivot" type="Node3D" parent="."]
-transform = Transform3D(0.997481, 0, 0.0709403, 0, 1, 0, -0.0709403, 0, 0.99748, -0.12282, 0.666188, 0.00581121)
-
-[node name="pitchpivot" type="Node3D" parent="twistpivot"]
-transform = Transform3D(1, 0, 0, 0, 0.979575, 0.201078, 0, -0.201078, 0.979575, 0, 0, 0)
-
-[node name="Camera3D" type="Camera3D" parent="twistpivot/pitchpivot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)

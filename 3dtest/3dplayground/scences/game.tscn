@@ -1,10 +1,43 @@
-[gd_scene load_steps=3 format=3 uid="uid://bkhl2slnmostm"]
+[gd_scene load_steps=7 format=3 uid="uid://bkhl2slnmostm"]
 
-[ext_resource type="PackedScene" uid="uid://chm56fq42uqrg" path="res://scences/node_3d.tscn" id="1_jx3ei"]
-[ext_resource type="PackedScene" uid="uid://l05erdff5w1j" path="res://scences/player.tscn" id="1_lbs7c"]
+[ext_resource type="PackedScene" uid="uid://bsfj34jmgit1s" path="res://scences/player.tscn" id="1_lbs7c"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_hejr8"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_lbs7c"]
+sky_material = SubResource("ProceduralSkyMaterial_hejr8")
+
+[sub_resource type="Environment" id="Environment_jx3ei"]
+background_mode = 2
+sky = SubResource("Sky_lbs7c")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_xfuu6"]
+size = Vector2(10, 10)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_jx3ei"]
+data = PackedVector3Array(5, 0, 5, -5, 0, 5, 5, 0, -5, -5, 0, 5, -5, 0, -5, 5, 0, -5)
 
 [node name="Game" type="Node3D"]
 
-[node name="Node3D" parent="." instance=ExtResource("1_jx3ei")]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_jx3ei")
 
-[node name="Node3D2" parent="." instance=ExtResource("1_lbs7c")]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="TestPlane" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_xfuu6")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="TestPlane"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TestPlane/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_jx3ei")
+
+[node name="Player" parent="." instance=ExtResource("1_lbs7c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.92406, 0)
+linear_damp = 3.0
